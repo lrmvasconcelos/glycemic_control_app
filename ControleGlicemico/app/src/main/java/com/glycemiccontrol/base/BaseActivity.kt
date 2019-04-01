@@ -3,13 +3,13 @@ package com.glycemiccontrol.base
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+
 import cn.pedant.SweetAlert.SweetAlertDialog
 import com.glycemiccontrol.R
-import com.glycemiccontrol.Util.Utils
 
-class BaseActivity: AppCompatActivity() {
+open class BaseActivity : AppCompatActivity() {
 
     private var dialogProgress: SweetAlertDialog? = null
 

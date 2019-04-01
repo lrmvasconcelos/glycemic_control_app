@@ -1,4 +1,4 @@
-package com.glycemiccontrol.Util;
+package com.glycemiccontrol.util;
 
 import android.animation.Animator;
 import android.view.View;
