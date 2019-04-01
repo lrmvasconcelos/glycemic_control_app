@@ -14,6 +14,8 @@ class UserTypeActivity : BaseActivity() {
 
         val model = ViewModelProviders.of(this).get(UserTypeViewModel::class.java)
 
+        showDialogProgress()
+
         model.teste("Teste")
     }
 }

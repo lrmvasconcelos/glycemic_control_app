@@ -56,8 +56,20 @@ open class BaseActivity : AppCompatActivity() {
         finish()
     }
 
-    fun showSimpleDialog(title: String, msg: String) {
+    fun showDialogProgress() {
+        if (dialogProgress == null) initDialogProgress()
+        dialogProgress!!.titleText = "Carregando"
+        if (!dialogProgress!!.isShowing) dialogProgress!!.show()
+    }
 
+    fun showDialogProgress(text: String) {
+        if (dialogProgress == null) initDialogProgress()
+        dialogProgress!!.titleText = text
+        if (!dialogProgress!!.isShowing) dialogProgress!!.show()
+    }
+
+    fun hideDialogProgress() {
+        if (dialogProgress != null && dialogProgress!!.isShowing) dialogProgress!!.dismiss()
     }
 
 }
