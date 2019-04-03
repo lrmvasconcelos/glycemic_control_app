@@ -17,14 +17,16 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:icon">
-        <activity android:name=".ui.UserTypeActivity">
+        <activity android:name=".ui.UserTypeActivity"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".ui.LoginActivity"
+                  android:screenOrientation="portrait"/>
         <activity android:name=".base.BaseActivity"/>
         <activity android:name=".MainActivity"/>
     </application>

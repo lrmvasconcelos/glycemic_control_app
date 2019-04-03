@@ -7,19 +7,25 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import androidx.lifecycle.MutableLiveData
 import com.glycemiccontrol.models.Doctor
+import com.glycemiccontrol.models.Pacient
 
 
 class LoginViewModel : ViewModel() {
 
 
-    private val _usersMutableLiveData = MutableLiveData<List<Doctor>>()
+    private val _doctorsMutableLiveData = MutableLiveData<List<Doctor>>()
+
+    private val _pacientsMutableLiveData = MutableLiveData<List<Pacient>>()
 
     private val _errorMutableLiveData = MutableLiveData<Throwable>()
 
     private val _progressMutableLiveData = MutableLiveData<Boolean>()
 
-    val userLiveData: LiveData<List<Doctor>>
-        get() = _usersMutableLiveData
+    val doctorsLiveData: LiveData<List<Doctor>>
+        get() = _doctorsMutableLiveData
+
+    val pacientLiveData: LiveData<List<Pacient>>
+        get() = _pacientsMutableLiveData
 
     val errorLiveData: LiveData<Throwable>
         get() = _errorMutableLiveData
@@ -35,7 +41,20 @@ class LoginViewModel : ViewModel() {
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
-                _usersMutableLiveData.value = response
+                _doctorsMutableLiveData.value = response
+            }, { error ->
+                _errorMutableLiveData.value = error
+            })
+    }
+
+    fun getAllPacients(){
+        RetrofitBase
+            .getInterfaceRetrofit()!!
+            .getAllPacients()
+            .subscribeOn(Schedulers.newThread())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                _pacientsMutableLiveData.value = response
             }, { error ->
                 _errorMutableLiveData.value = error
             })

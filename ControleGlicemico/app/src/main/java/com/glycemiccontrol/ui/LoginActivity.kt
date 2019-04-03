@@ -1,12 +1,16 @@
 package com.glycemiccontrol.ui
 
 import android.os.Bundle
+import android.text.TextUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.afollestad.materialdialogs.MaterialDialog
 import com.glycemiccontrol.R
+import com.glycemiccontrol.app.App
 import com.glycemiccontrol.base.BaseActivity
 import com.glycemiccontrol.models.Doctor
+import com.glycemiccontrol.models.Pacient
+import com.glycemiccontrol.models.UserType
 import com.glycemiccontrol.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -14,7 +18,9 @@ class LoginActivity : BaseActivity() {
 
     private lateinit var viewModel: LoginViewModel
 
-    private var pacient: Doctor? = null
+    private var doctor: Doctor? = null
+
+    private var pacient: Pacient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,32 +30,91 @@ class LoginActivity : BaseActivity() {
 
 
         button_action_login.setOnClickListener {
-            loadUsers(user_account_field.text.toString())
+            if (isValidInput())
+                if (App.getUsarType()!! == UserType.MEDICO)
+                    loadDoctors(user_account_field.text.toString())
+                else
+                    loadPatients(user_account_field.text.toString())
         }
     }
 
-    private fun loadUsers(user: String) {
+    private fun isValidInput(): Boolean {
+
+        var isvalid = true
+
+        if (TextUtils.isEmpty(user_account_field.text)) {
+            user_account.error = "Campo obrigatório"
+            isvalid = false
+        } else {
+            user_account.error = null
+
+        }
+
+        if (TextUtils.isEmpty(user_password_field.text)) {
+            user_password.error = "Campo obrigatório"
+            isvalid = false
+        } else {
+            user_password.error = null
+
+        }
+
+        return isvalid
+
+    }
+
+    private fun loadDoctors(user: String) {
 
         showDialogProgress()
 
         viewModel.getAllDoctors()
 
-        viewModel.userLiveData.observe(this, Observer {
+        viewModel.doctorsLiveData.observe(this, Observer {
 
             it.forEach {
-                if (it.matricula.equals(user))
+                if (it.matricula.equals(user)) {
+                    App.setDoctor(it)
+                    doctor = it
+                }
+
+            }
+
+            hideDialogProgress()
+            if (doctor == null)
+                showSimpleDialog(" Ops", "Não foi possível encontrar usuário",
+                    MaterialDialog.SingleButtonCallback { _, _ -> })
+        })
+
+        viewModel.errorLiveData.observe(this, Observer {
+            showSimpleDialog(" Ops", "Não foi possível encontrar usuário",
+                MaterialDialog.SingleButtonCallback { _, _ -> })
+        })
+    }
+
+    private fun loadPatients(user: String) {
+
+        showDialogProgress()
+
+        viewModel.getAllPacients()
+
+        viewModel.pacientLiveData.observe(this, Observer {
+
+            it.forEach {
+                if (it.matricula.equals(user)) {
+                    App.setPacient(it)
                     pacient = it
+                }
 
             }
 
             hideDialogProgress()
             if (pacient == null)
-                showSimpleDialog(" Ops","Não foi possível encontrar usuário" ,
+                showSimpleDialog(" Ops", "Não foi possível encontrar usuário",
                     MaterialDialog.SingleButtonCallback { _, _ -> })
         })
 
         viewModel.errorLiveData.observe(this, Observer {
-            showSimpleDialog(" Ops","Não foi possível encontrar usuário" ,
+            hideDialogProgress()
+            showSimpleDialog(" Ops", "Não foi possível encontrar usuário",
                 MaterialDialog.SingleButtonCallback { _, _ -> })
         })
     }
