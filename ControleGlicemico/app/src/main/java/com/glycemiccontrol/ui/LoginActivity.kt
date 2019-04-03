@@ -22,6 +22,7 @@ class LoginActivity : BaseActivity() {
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
 
+
         button_action_login.setOnClickListener {
             loadUsers(user_account_field.text.toString())
         }
