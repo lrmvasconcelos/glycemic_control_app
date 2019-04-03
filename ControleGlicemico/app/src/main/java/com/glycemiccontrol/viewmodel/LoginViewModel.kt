@@ -1,25 +1,24 @@
 package com.glycemiccontrol.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.glycemiccontrol.service.RetrofitBase
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import androidx.lifecycle.MutableLiveData
-import com.glycemiccontrol.models.Pacients
+import com.glycemiccontrol.models.Doctor
 
 
-class UserTypeViewModel : ViewModel() {
+class LoginViewModel : ViewModel() {
 
 
-    private val _usersMutableLiveData = MutableLiveData<List<Pacients>>()
+    private val _usersMutableLiveData = MutableLiveData<List<Doctor>>()
 
     private val _errorMutableLiveData = MutableLiveData<Throwable>()
 
     private val _progressMutableLiveData = MutableLiveData<Boolean>()
 
-    val userLiveData: LiveData<List<Pacients>>
+    val userLiveData: LiveData<List<Doctor>>
         get() = _usersMutableLiveData
 
     val errorLiveData: LiveData<Throwable>
@@ -28,11 +27,11 @@ class UserTypeViewModel : ViewModel() {
     val progress: LiveData<Boolean> get() = _progressMutableLiveData
 
 
-    fun getAllPacients() {
+    fun getAllDoctors() {
 
         RetrofitBase
             .getInterfaceRetrofit()!!
-            .getAllPacients()
+            .getAllDoctors()
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->

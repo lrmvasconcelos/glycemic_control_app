@@ -3,7 +3,7 @@ package com.glycemiccontrol.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Pacients {
+class Doctor {
 
 
     @SerializedName("crm")
