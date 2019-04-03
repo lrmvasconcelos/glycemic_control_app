@@ -3,6 +3,10 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.glycemiccontrol">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
             android:name=".app.App"
             android:allowBackup="true"
@@ -11,7 +15,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            tools:ignore="GoogleAppIndexingWarning" tools:replace="android:icon">
+            tools:ignore="GoogleAppIndexingWarning"
+            tools:replace="android:icon">
         <activity android:name=".ui.UserTypeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -1,13 +1,17 @@
 package com.glycemiccontrol.base
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 
 import cn.pedant.SweetAlert.SweetAlertDialog
+import com.afollestad.materialdialogs.MaterialDialog
 import com.glycemiccontrol.R
+import com.glycemiccontrol.util.AnimationsUtil
 
 open class BaseActivity : AppCompatActivity() {
 
@@ -70,6 +74,24 @@ open class BaseActivity : AppCompatActivity() {
 
     fun hideDialogProgress() {
         if (dialogProgress != null && dialogProgress!!.isShowing) dialogProgress!!.dismiss()
+    }
+
+    fun showSimpleDialog(title: String, text: String, callback: MaterialDialog.SingleButtonCallback) {
+        try {
+            AnimationsUtil.shakeError(
+                MaterialDialog.Builder(this)
+                    .title(title)
+                    .content(text)
+                    .cancelable(false)
+                    .positiveText("Ok")
+                    .onPositive(callback)
+                    .show().getView(), AnimationsUtil.DURATION_DIALOG
+            )
+
+        } catch (ex: Exception) {
+            Log.e("asd", "ads")
+        }
+
     }
 
 }

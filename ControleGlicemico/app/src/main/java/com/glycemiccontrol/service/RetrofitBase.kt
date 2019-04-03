@@ -1,6 +1,7 @@
 package com.glycemiccontrol.service
 
 import com.glycemiccontrol.BuildConfig
+import com.glycemiccontrol.app.Constants
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,48 +13,52 @@ import java.util.concurrent.TimeUnit
 
 class RetrofitBase {
 
-    private lateinit var interfaceRetrofit: RestApi
-    private lateinit var retrofit: Retrofit
 
-    init {
-        initRetrofit()
-    }
+    companion object {
 
-    fun getInterfaceRetrofit(): RestApi? {
-        return interfaceRetrofit
-    }
-
-    private fun initRetrofit() {
-        val builder = OkHttpClient.Builder()
-        builder.readTimeout(1, TimeUnit.HOURS)
-        builder.connectTimeout(60, TimeUnit.SECONDS)
-
-        if (BuildConfig.DEBUG) {
-            val logInterceptor = HttpLoggingInterceptor()
-            logInterceptor.level = HttpLoggingInterceptor.Level.BODY
-            builder.addInterceptor(logInterceptor)
+        init {
+            initRetrofit()
         }
 
-        val gsonBuilder = GsonBuilder()
-            .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
+        private lateinit var interfaceRetrofit: RestApi
+        private lateinit var retrofit: Retrofit
 
-        //        gsonBuilder.registerTypeAdapter(TypePayment.class, new TypePaymentDeserializer());
-        val gson = gsonBuilder.create()
-        val gsonConverterFactory = GsonConverterFactory.create(gson)
+        fun getInterfaceRetrofit(): RestApi? {
+            return interfaceRetrofit
+        }
 
-        //        addAuthorizationHeaders(builder);
+        private fun initRetrofit() {
+            val builder = OkHttpClient.Builder()
+            builder.readTimeout(1, TimeUnit.HOURS)
+            builder.connectTimeout(60, TimeUnit.SECONDS)
 
-        val urlBase = ""
+            if (BuildConfig.DEBUG) {
+                val logInterceptor = HttpLoggingInterceptor()
+                logInterceptor.level = HttpLoggingInterceptor.Level.BODY
+                builder.addInterceptor(logInterceptor)
+            }
 
-        val httpClient = builder.build()
+            val gsonBuilder = GsonBuilder()
+                .excludeFieldsWithModifiers(Modifier.FINAL, Modifier.TRANSIENT, Modifier.STATIC)
 
-        retrofit = Retrofit.Builder()
-            .baseUrl(urlBase)
-            .client(httpClient)
-            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-            .addConverterFactory(gsonConverterFactory)
-            .build()
+            //        gsonBuilder.registerTypeAdapter(TypePayment.class, new TypePaymentDeserializer());
+            val gson = gsonBuilder.create()
+            val gsonConverterFactory = GsonConverterFactory.create(gson)
 
-        interfaceRetrofit = retrofit.create(RestApi::class.java)
+            //        addAuthorizationHeaders(builder);
+
+            val urlBase = Constants.BASE_URL
+
+            val httpClient = builder.build()
+
+            retrofit = Retrofit.Builder()
+                .baseUrl(urlBase)
+                .client(httpClient)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(gsonConverterFactory)
+                .build()
+
+            interfaceRetrofit = retrofit.create(RestApi::class.java)
+        }
     }
 }

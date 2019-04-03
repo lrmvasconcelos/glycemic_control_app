@@ -7,4 +7,75 @@
         android:layout_height="match_parent"
         tools:context=".ui.UserTypeActivity">
 
+    <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_account_circle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="96dp"
+            android:id="@+id/imageView"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/imageView">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_account_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Usuário"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_default"
+            android:layout_marginTop="@dimen/margin_top"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/user_account">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/user_password_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+            android:id="@+id/button_action_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:layout_margin="@dimen/margin_default"
+            android:text="Entrar"
+            app:layout_constraintTop_toBottomOf="@+id/user_password"
+    />
+
+    <TextView
+            android:id="@+id/action_forgot_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:text="Cadastrar"
+            app:layout_constraintTop_toBottomOf="@+id/button_action_login"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
