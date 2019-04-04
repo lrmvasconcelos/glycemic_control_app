@@ -6,12 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.glycemiccontrol.R
 import kotlinx.android.synthetic.main.test_view.view.*
-import java.util.ArrayList
+import java.util.*
 
 class GlycemicTestAdapter(
     private val items: MutableList<GlycemicModel> = ArrayList(),
     private val callback: GlycemicTestView.OnItemClick
-    ) : RecyclerView.Adapter<GlycemicTestAdapter.ItemViewHolder>() {
+) : RecyclerView.Adapter<GlycemicTestAdapter.ItemViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {

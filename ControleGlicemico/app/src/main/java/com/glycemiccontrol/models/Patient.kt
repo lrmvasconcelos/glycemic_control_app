@@ -3,7 +3,7 @@ package com.glycemiccontrol.models
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class Pacient {
+class Patient {
     @SerializedName("dataNascimento")
     @Expose
     var dataNascimento: String? = null

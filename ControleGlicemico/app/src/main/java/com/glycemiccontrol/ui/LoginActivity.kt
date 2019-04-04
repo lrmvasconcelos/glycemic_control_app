@@ -9,7 +9,7 @@ import com.glycemiccontrol.R
 import com.glycemiccontrol.app.App
 import com.glycemiccontrol.base.BaseActivity
 import com.glycemiccontrol.models.Doctor
-import com.glycemiccontrol.models.Pacient
+import com.glycemiccontrol.models.Patient
 import com.glycemiccontrol.models.UserType
 import com.glycemiccontrol.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.activity_login.*
@@ -20,7 +20,7 @@ class LoginActivity : BaseActivity() {
 
     private var doctor: Doctor? = null
 
-    private var pacient: Pacient? = null
+    private var patient: Patient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,18 +96,19 @@ class LoginActivity : BaseActivity() {
 
         viewModel.getAllPacients()
 
-        viewModel.pacientLiveData.observe(this, Observer {
+        viewModel.patientLiveData.observe(this, Observer { it ->
 
             it.forEach {
                 if (it.matricula.equals(user)) {
                     App.setPacient(it)
-                    pacient = it
+                    patient = it
+                    openActivityNewTask(PatientActivity::class.java)
                 }
 
             }
 
             hideDialogProgress()
-            if (pacient == null)
+            if (patient == null)
                 showSimpleDialog(" Ops", "Não foi possível encontrar usuário",
                     MaterialDialog.SingleButtonCallback { _, _ -> })
         })

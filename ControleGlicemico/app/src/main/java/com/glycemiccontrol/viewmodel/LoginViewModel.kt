@@ -7,7 +7,7 @@ import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import androidx.lifecycle.MutableLiveData
 import com.glycemiccontrol.models.Doctor
-import com.glycemiccontrol.models.Pacient
+import com.glycemiccontrol.models.Patient
 
 
 class LoginViewModel : ViewModel() {
@@ -15,7 +15,7 @@ class LoginViewModel : ViewModel() {
 
     private val _doctorsMutableLiveData = MutableLiveData<List<Doctor>>()
 
-    private val _pacientsMutableLiveData = MutableLiveData<List<Pacient>>()
+    private val _patientsMutableLiveData = MutableLiveData<List<Patient>>()
 
     private val _errorMutableLiveData = MutableLiveData<Throwable>()
 
@@ -24,8 +24,8 @@ class LoginViewModel : ViewModel() {
     val doctorsLiveData: LiveData<List<Doctor>>
         get() = _doctorsMutableLiveData
 
-    val pacientLiveData: LiveData<List<Pacient>>
-        get() = _pacientsMutableLiveData
+    val patientLiveData: LiveData<List<Patient>>
+        get() = _patientsMutableLiveData
 
     val errorLiveData: LiveData<Throwable>
         get() = _errorMutableLiveData
@@ -54,7 +54,7 @@ class LoginViewModel : ViewModel() {
             .subscribeOn(Schedulers.newThread())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
-                _pacientsMutableLiveData.value = response
+                _patientsMutableLiveData.value = response
             }, { error ->
                 _errorMutableLiveData.value = error
             })

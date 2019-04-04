@@ -2,7 +2,7 @@ package com.glycemiccontrol.app
 
 import android.app.Application
 import com.glycemiccontrol.models.Doctor
-import com.glycemiccontrol.models.Pacient
+import com.glycemiccontrol.models.Patient
 import com.glycemiccontrol.models.UserType
 
 class App : Application() {
@@ -15,7 +15,7 @@ class App : Application() {
 
         private var doctor: Doctor? = null
 
-        private var pacient: Pacient? = null
+        private var patient: Patient? = null
 
         fun getInstance(): App? {
             return instance
@@ -29,12 +29,12 @@ class App : Application() {
             return this.userType
         }
 
-        fun setPacient(pacient: Pacient) {
-            this.pacient = pacient
+        fun setPacient(patient: Patient) {
+            this.patient = patient
         }
 
-        fun getPacient(): Pacient? {
-            return this.pacient
+        fun getPacient(): Patient? {
+            return this.patient
         }
 
         fun setDoctor(doctor: Doctor) {
