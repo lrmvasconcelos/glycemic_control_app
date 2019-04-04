@@ -15,7 +15,7 @@ class GlycemicTestAdapter(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.test_view, parent, true)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.test_view, parent, false)
         return ItemViewHolder(view); }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {

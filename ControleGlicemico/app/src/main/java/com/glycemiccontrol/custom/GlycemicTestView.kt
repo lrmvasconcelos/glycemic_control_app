@@ -14,7 +14,7 @@ class GlycemicTestView @JvmOverloads constructor(
 ) : LinearLayout(context, attributeSet, defStyle) {
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.item_test, this, false)
+        LayoutInflater.from(context).inflate(R.layout.item_test, this, true)
     }
 
     fun make(position: Int, model: GlycemicModel, callback: OnItemClick) {
