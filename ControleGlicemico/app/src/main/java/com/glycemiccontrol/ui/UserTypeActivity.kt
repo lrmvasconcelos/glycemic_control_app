@@ -25,6 +25,6 @@ class UserTypeActivity : BaseActivity() {
     }
 
     private fun openLoginActivity(){
-        openActivity(PatientActivity::class.java)
+        openActivity(LoginActivity::class.java)
     }
 }

@@ -5,11 +5,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.glycemiccontrol.R
+import com.glycemiccontrol.models.Test
 import kotlinx.android.synthetic.main.test_view.view.*
 import java.util.*
 
 class GlycemicTestAdapter(
-    private val items: MutableList<GlycemicModel> = ArrayList(),
+    private val items: MutableList<Test> = ArrayList(),
     private val callback: GlycemicTestView.OnItemClick
 ) : RecyclerView.Adapter<GlycemicTestAdapter.ItemViewHolder>() {
 

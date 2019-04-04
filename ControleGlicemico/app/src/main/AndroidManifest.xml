@@ -19,8 +19,6 @@
             tools:replace="android:icon">
         <activity android:name=".ui.PatientActivity">
         </activity>
-        <activity android:name=".ui.PacientActivity">
-        </activity>
         <activity
                 android:name=".ui.UserTypeActivity"
                 android:screenOrientation="portrait">
