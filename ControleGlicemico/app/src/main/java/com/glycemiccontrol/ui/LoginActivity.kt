@@ -74,6 +74,7 @@ class LoginActivity : BaseActivity() {
                 if (it.matricula.equals(user)) {
                     App.setDoctor(it)
                     doctor = it
+                    openActivityNewTask(DoctorActivity::class.java)
                 }
 
             }

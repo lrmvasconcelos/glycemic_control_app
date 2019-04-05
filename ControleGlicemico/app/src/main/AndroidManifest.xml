@@ -17,6 +17,8 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:icon">
+        <activity android:name=".ui.DoctorActivity">
+        </activity>
         <activity android:name=".ui.PatientActivity">
         </activity>
         <activity
