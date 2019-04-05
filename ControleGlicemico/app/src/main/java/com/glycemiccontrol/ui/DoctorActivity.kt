@@ -64,6 +64,8 @@ class DoctorActivity : BaseActivity() {
         if (!patients.isEmpty()) {
             recyclerView.adapter = PatientAdapter(patients, object : PatientCardView.OnItemClick {
                 override fun onItemClick(position: Int, model: Patient) {
+                    App.setPacient(model)
+                    openActivity(TestsActivity::class.java)
                 }
             })
         }
